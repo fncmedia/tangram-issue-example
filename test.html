@@ -1,0 +1,43 @@
+<html>
+	<head>
+	    <link href='leaflet.css' rel='stylesheet' type='text/css'>
+	</head>
+	<body  style="height:100%;width:100%;margin:0px;">
+		<div id="mapid" style="height:100%;width:100%"></div>
+
+		<script type="text/javascript" src="leaflet-src.js" ></script>
+
+		<script type="text/javascript" src="leaflet_bing.js" ></script>
+
+		<script type="text/javascript" src="tangram.debug.js" ></script>
+
+		<script type="text/javascript">
+
+			var mapzenLayer = Tangram.leafletLayer({
+			  scene: 'scene.yaml',
+			  attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
+			});
+
+			var bingLayer = L.bingLayer();
+
+
+			var map = L.map('mapid', {
+			  center: [51.505, -0.09],
+			  zoom: 13
+			});
+
+
+			mapzenLayer
+			  .addTo(map);
+
+			var baseMaps = {
+			  "Streets": mapzenLayer,
+			  "Satelite": bingLayer
+			};
+
+
+			L.control.layers(baseMaps).addTo(map);
+
+		</script>
+	</body>
+</html>
